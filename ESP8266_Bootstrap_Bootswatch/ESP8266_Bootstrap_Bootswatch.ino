@@ -44,6 +44,7 @@ String buildWebsite() { //pagina home html
   webSite +=     "<div class='col-md-12'>";
   webSite +=       "<h1>Demo Webserver ESP8266 + Bootstrap</h1>";
   webSite +=       "<h3>Mini estação Metereologica</h3>";
+  //
   webSite +=       "<ul class='nav nav-pills'>";
   webSite +=         "<li class='active'>";
   webSite +=           "<a href='#'> <span class='badge pull-right'>";
@@ -55,7 +56,9 @@ String buildWebsite() { //pagina home html
   webSite +=           "</span>Umidade</a>";
   webSite +=         "</li>";
   webSite +=       "</ul>";
-  webSite +=       "<table class='table'>";  // Tableau des relevés
+    //tabela dos sensores
+  webSite +=       " <div class='table-responsive'>";//tabela responsiva
+  webSite +=       "<table class='table table-condensed'>";  // Tableau des relevés
   webSite +=         "<thead><tr><th>Sensor</th><th>Medição</th><th>Leitura</th><th>Leitura anterior</th></tr></thead>"; //Entrada
   webSite +=         "<tbody>";  // Conteudo da tabela
   webSite +=           "<tr><td>DHT11</td><td>Temp</td><td>"; // primeira linha exibe a  temperatura
@@ -67,33 +70,52 @@ String buildWebsite() { //pagina home html
   webSite +=             "%</td><td>";
   webSite +=             "-</td></tr>";
   webSite +=       "</tbody></table>";
-  webSite +=       "<h3>GPIO</h3>"; // botões
-  webSite +=       "<div class='row'>";
-  webSite +=         "<div class='col-md-4'><h4 class ='text-left'>D5 ";
+  webSite +=       "<div>";//fecha tabela responsiva
+  //tabela dos botões
+  webSite +=       "<div class='container-fluid'>";
+  webSite +=       "<div class='row'>"; // botões geral
+  webSite +=       "<div class='col-sm-9'>";
+  webSite +=       "<h3>GPIO</h3>";
+//
+ webSite +=       "<div class='row'>";// D5
+  webSite +=         "<div class='col-xs-1 col-sm-1'><h4 class ='text-left'>D5 ";
   webSite +=           "<span class='badge'>";
   webSite +=           etatGpio[0]; //Array botão D5 exibe estatus do pino
   webSite +=         "</span></h4></div>";
-  webSite +=         "<div class='col-md-4'><form action='/' method='POST'><button type='button submit' name='D5' value='1' class='btn btn-success btn-lg'>ON</button></form></div>";
-  webSite +=         "<div class='col-md-4'><form action='/' method='POST'><button type='button submit' name='D5' value='0' class='btn btn-danger btn-lg'>OFF</button></form></div>";
-  webSite +=         "<div class='col-md-4'><h4 class ='text-left'>D6 ";
+  webSite +=         "<div class='col-xs-1 col-sm-2'><form action='/' method='POST'><button type='button submit' name='D5' value='1' class='btn btn-success btn-lg'>ON</button></form></div>";
+  webSite +=         "<div class='col-xs-1 col-sm-2'><form action='/' method='POST'><button type='button submit' name='D5' value='0' class='btn btn-danger btn-lg'>OFF</button></form></div>";
+  webSite +=       "</div>"; // D5
+//
+ webSite +=       "<div class='row'>";// D6
+  webSite +=         "<div class='col-xs-1 col-sm-1'><h4 class ='text-left'>D6 ";
   webSite +=           "<span class='badge'>";
   webSite +=           etatGpio[1]; //Array botão D6 exibe estatus do pino
   webSite +=         "</span></h4></div>";
-  webSite +=         "<div class='col-md-4'><form action='/' method='POST'><button type='button submit' name='D6' value='1' class='btn btn-success btn-lg'>ON</button></form></div>";
-  webSite +=         "<div class='col-md-4'><form action='/' method='POST'><button type='button submit' name='D6' value='0' class='btn btn-danger btn-lg'>OFF</button></form></div>";
-  webSite +=         "<div class='col-md-4'><h4 class ='text-left'>D7 ";
+  webSite +=         "<div class='col-xs-1 col-sm-2'><form action='/' method='POST'><button type='button submit' name='D6' value='1' class='btn btn-success btn-lg'>ON</button></form></div>";
+  webSite +=         "<div class='col-xs-1 col-sm-2'><form action='/' method='POST'><button type='button submit' name='D6' value='0' class='btn btn-danger btn-lg'>OFF</button></form></div>";
+  webSite +=       "</div>"; // D6
+//
+ webSite +=       "<div class='row'>";// D7
+  webSite +=         "<div class='col-xs-1 col-sm-1'><h4 class ='text-left'>D7 ";
   webSite +=           "<span class='badge'>";
   webSite +=           etatGpio[2]; //Array botão D7 exibe estatus do pino
   webSite +=         "</span></h4></div>";
-  webSite +=         "<div class='col-md-4'><form action='/' method='POST'><button type='button submit' name='D7' value='1' class='btn btn-success btn-lg'>ON</button></form></div>";
-  webSite +=         "<div class='col-md-4'><form action='/' method='POST'><button type='button submit' name='D7' value='0' class='btn btn-danger btn-lg'>OFF</button></form></div>";
-  webSite +=         "<div class='col-md-4'><h4 class ='text-left'>D8 ";
-  webSite +=           "<span class='badge'>";
+  webSite +=         "<div class='col-xs-1 col-sm-2'><form action='/' method='POST'><button type='button submit' name='D7' value='1' class='btn btn-success btn-lg'>ON</button></form></div>";
+  webSite +=         "<div class='col-xs-1 col-sm-2'><form action='/' method='POST'><button type='button submit' name='D7' value='0' class='btn btn-danger btn-lg'>OFF</button></form></div>";
+  webSite +=       "</div>"; // D7
+//
+ webSite +=       "<div class='row'>";// D8
+  webSite +=         "<div class='col-xs-1 col-sm-1'><h4 class ='text-left'>D8 ";
+  webSite +=         "<span class='badge'>";
   webSite +=           etatGpio[3]; //Array botão D8 exibe estatus do pino
   webSite +=         "</span></h4></div>";
-  webSite +=         "<div class='col-md-4'><form action='/' method='POST'><button type='button submit' name='D8' value='1' class='btn btn-success btn-lg'>ON</button></form></div>";
-  webSite +=         "<div class='col-md-4'><form action='/' method='POST'><button type='button submit' name='D8' value='0' class='btn btn-danger btn-lg'>OFF</button></form></div>";
-  webSite +=       "</div>";
+  webSite +=         "<div class='col-xs-1 col-sm-2'><form action='/' method='POST'><button type='button submit' name='D8' value='1' class='btn btn-success btn-lg'>ON</button></form></div>";
+  webSite +=         "<div class='col-xs-1 col-sm-2'><form action='/' method='POST'><button type='button submit' name='D8' value='0' class='btn btn-danger btn-lg'>OFF</button></form></div>";
+  webSite +=       "</div>"; // D8
+
+  webSite +=       "</div>"; // botões ON OFF
+  webSite +=       "</div>"; //GPIO
+  webSite +=       "<div>";//fecha tabela responsiva
   // webSite +=     "<br><p><a href='http://www.projetsdiy.fr'>www.projetsdiy.fr</p>
   webSite += "</div></div></div>";
   webSite += "</body></html>";
