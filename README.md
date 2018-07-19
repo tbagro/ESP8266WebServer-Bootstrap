@@ -1,10 +1,10 @@
 # ESP8266 WebServer + Bootstrap + Bootswatch
 How to create a beautifull interface for your ESP8266 project and change theme dynamically
-* Change theme using Bootswatch CDN
-* Display DHT22 and BMP180 measures
+
+* Display DHT22 or DHT11
 * Use GPIO from Web Interface (use Leds to simulate for example)
 
-Libraries used: WiFiClient, ESP8266WebServer, DHT and Adafruit_BMP085
+Libraries used: WiFiClient, ESP8266WebServer, DHT 
 Bootswatch CND : https://www.bootstrapcdn.com/
 
 ## Equipment used
@@ -19,10 +19,7 @@ Bootswatch CND : https://www.bootstrapcdn.com/
 |DHT22  |VCC |5V         |
 |       |GND |G          |
 |       |Data|D4         |
-|BMP180 |VCC |5V         |
-|       |GND |G          |
-|       |SDA |D2         |
-|       |SCL |D1         |
+
 
 ## More info
  - Understanding how to program a web server on an ESP8266 : http://www.diyprojects.io/esp8266-web-server-tutorial-create-html-interface-connected-object/
@@ -46,10 +43,7 @@ Comment créer une interface Web pour vos projets ESP8266
 |DHT22  |VCC    |5V            |
 |       |GND    |G             |
 |       |Data   |D4            |
-|BMP180 |VCC    |5V            |
-|       |GND    |G             |
-|       |SDA    |D2            |
-|       |SCL    |D1            |
+
 
 ## Tutoriels en Français
 * Comprendre comment programmer un serveur web sur un ESP8266 : http://www.projetsdiy.fr/esp8266-serveur-web-interface-graphique-html/
