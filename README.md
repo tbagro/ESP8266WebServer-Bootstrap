@@ -10,7 +10,6 @@ Bootswatch CND : https://www.bootstrapcdn.com/
 ## Equipment used
 
 * Any ESP8266 ESP-12 module, for example <a href="http://www.banggood.com/search/esp8266-nodemcu/0-0-0-1-3-45-0-price-0-0_p-1.html?sortType=asc?p=RA18043558422201601Y" target="_blank" rel="nofollow" data-mce-href="http://www.banggood.com/search/esp8266-nodemcu/0-0-0-1-3-45-0-price-0-0_p-1.html?sortType=asc?p=RA18043558422201601Y">Wemos D1 mini</a>
-* <a href="http://s.click.aliexpress.com/e/eM72zRrbE" target="_blank" rel="nofollow" data-mce-href="http://s.click.aliexpress.com/e/eM72zRrbE">BMP180</a> : Atmospheric pressure sensor
 * <a href="http://s.click.aliexpress.com/e/BeYvjyfim" target="_blank" rel="nofollow" data-mce-href="http://s.click.aliexpress.com/e/BeYvjyfim">DHT22</a> Temperature and humidity sensor
 
 ## Wiring
@@ -24,7 +23,6 @@ Bootswatch CND : https://www.bootstrapcdn.com/
 ## More info
  - Understanding how to program a web server on an ESP8266 : http://www.diyprojects.io/esp8266-web-server-tutorial-create-html-interface-connected-object/
  - How to create beautiful interface with Bootstrap : http://www.diyprojects.io/bootstrap-create-beautiful-web-interface-projects-esp8266/
- - How to change Boootstrap theme with Bootswatch CDN : http://www.diyprojects.io/bootstrap-web-server-esp8266-use-bootswatch-themes/
  
 # Interface Bootstrap pour vos projets ESP8266 
 Comment créer une interface Web pour vos projets ESP8266
