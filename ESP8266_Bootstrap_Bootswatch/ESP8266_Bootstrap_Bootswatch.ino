@@ -42,6 +42,7 @@ String buildWebsite() { //pagina home html
   webSite += "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>";
   webSite += "<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>";
   webSite += "<title>ESP8266 Demo - www.projetsdiy.fr</title></head><body>";
+
   webSite += "<div class='container-fluid'>";
   webSite +=   "<div class='row'>";
   webSite +=     "<div class='col-md-12'>";
@@ -51,29 +52,29 @@ String buildWebsite() { //pagina home html
   webSite +=       "<ul class='nav nav-pills'>";
   webSite +=         "<li class='active'>";
   webSite +=           "<a href='#'> <span class='badge pull-right'>";
-  webSite +=           t;
+  webSite +=           t;// exibe a variavel de temperatura
   webSite +=           "</span> Temperatura</a>";
   webSite +=         "</li><li>";
   webSite +=           "<a href='#'> <span class='badge pull-right'>";
-  webSite +=           h;
+  webSite +=           h;// exibe a variavel de umidade
   webSite +=           "</span>Umidade</a>";
   webSite +=         "</li>";
   webSite +=       "</ul>";
     //tabela dos sensores
-  webSite +=       " <div class='table-responsive'>";//tabela responsiva
+  webSite += "<article>";
+  webSite +=       "<<section class='table-responsive-sm'>";//tabela responsiva
   webSite +=       "<table class='table table-condensed'>";  // Tableau des relevés
-  webSite +=         "<thead><tr><th>Sensor</th><th>Medição</th><th>Leitura</th><th>Leitura anterior</th></tr></thead>"; //Entrada
+  webSite +=         "<thead><tr><th>Sensor</th><th>Medição</th><th>Leitura</th></tr></thead>"; //Entrada
   webSite +=         "<tbody>";  // Conteudo da tabela
   webSite +=           "<tr><td>DHT11</td><td>Temp</td><td>"; // primeira linha exibe a  temperatura
-  webSite +=             t;
+  webSite +=             t;// exibe a variavel de temperatura
   webSite +=             "&deg;C</td><td>";
   webSite +=             "-</td></tr>";
   webSite +=           "<tr class='active'><td>DHT11</td><td>Umid</td><td>"; // primeira linha exibe a  umidade
-  webSite +=             h;
-  webSite +=             "%</td><td>";
-  webSite +=             "-</td></tr>";
+  webSite +=             h;// exibe a variavel de umidade
+  webSite +=             "%</td></tr>";
   webSite +=       "</tbody></table>";
-  webSite +=       "<div>";//fecha tabela responsiva
+  webSite +=       "</section>";//fecha tabela responsiva
   //tabela dos botões
   webSite +=       "<div class='container-fluid'>";
   webSite +=       "<div class='row'>"; // botões geral
@@ -120,6 +121,7 @@ String buildWebsite() { //pagina home html
   webSite +=       "</div>"; //GPIO
   webSite +=       "<div>";//fecha tabela responsiva
   // webSite +=     "<br><p><a href='http://www.projetsdiy.fr'>www.projetsdiy.fr</p>
+  webSite += "</article>";
   webSite += "</div></div></div>";
   webSite += "</body></html>";
   return webSite;
