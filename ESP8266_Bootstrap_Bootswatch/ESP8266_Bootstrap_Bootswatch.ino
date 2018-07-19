@@ -77,8 +77,8 @@ String buildWebsite() { //pagina home html
   webSite +=       "<div class='col-sm-9'>";
   webSite +=       "<h3>GPIO</h3>";
 //
- webSite +=       "<div class='row'>";// D5
-  webSite +=         "<div class='col-xs-1 col-sm-1'><h4 class ='text-left'>D5 ";
+ webSite +=       "<div class='row'>";// cria a linha D5
+  webSite +=         "<div class='col-xs-1 col-sm-1'><h4 class ='text-left'>D5 ";// cria coluna 
   webSite +=           "<span class='badge'>";
   webSite +=           etatGpio[0]; //Array botão D5 exibe estatus do pino
   webSite +=         "</span></h4></div>";
