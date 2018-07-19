@@ -27,12 +27,10 @@ Bootswatch CND : https://www.bootstrapcdn.com/
 # Interface Bootstrap pour vos projets ESP8266 
 Comment créer une interface Web pour vos projets ESP8266
 * Changer de thème avec Bootswatch
-* Afficher les mesures d'un DHT22 et d'un BMP180
 * Comment utiliser le GPIO depuis l'interface Web
 
 ## Matériel utilisé
 * N'importe quel ESP8266 (ESP-12x), par exemple <a href="http://www.banggood.com/search/esp8266-nodemcu/0-0-0-1-3-45-0-price-0-0_p-1.html?sortType=asc?p=RA18043558422201601Y" target="_blank" rel="nofollow" data-mce-href="http://www.banggood.com/search/esp8266-nodemcu/0-0-0-1-3-45-0-price-0-0_p-1.html?sortType=asc?p=RA18043558422201601Y">Wemos D1 mini</a>
-* <a href="http://s.click.aliexpress.com/e/eM72zRrbE" target="_blank" rel="nofollow" data-mce-href="http://s.click.aliexpress.com/e/eM72zRrbE">BMP180</a> : Capteur de pression atmosphérique
 * <a href="http://s.click.aliexpress.com/e/BeYvjyfim" target="_blank" rel="nofollow" data-mce-href="http://s.click.aliexpress.com/e/BeYvjyfim">DHT22</a> capteur de température et d'humitité
 
 ## Cablage
