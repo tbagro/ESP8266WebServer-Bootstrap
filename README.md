@@ -1,4 +1,4 @@
-# ESP8266 WebServer + Bootstrap + Bootswatch
+# ESP8266 WebServer + Bootstrap 
 How to create a beautifull interface for your ESP8266 project and change theme dynamically
 
 * Display DHT22 or DHT11
