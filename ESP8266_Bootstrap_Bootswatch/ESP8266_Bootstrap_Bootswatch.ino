@@ -13,8 +13,8 @@
 #include <DHTesp.h> //https://github.com/beegee-tokyo/DHTesp
 
 //variaveis do router
-#define ssid      "Tamanduai"       // WiFi SSID
-#define password  "semsenha"   // WiFi password
+#define ssid      "SuaSSID"       // WiFi SSID
+#define password  "SuaSenha"   // WiFi password
 
 
 // variaveis GPIO
