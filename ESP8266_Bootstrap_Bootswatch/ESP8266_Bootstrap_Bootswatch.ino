@@ -36,8 +36,11 @@ IPAddress subnet(255, 255, 255, 0);
 String buildWebsite() { //pagina home html
   
   String webSite = "<html lang='pt-br'><head>"; // <meta name="viewport" content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'>
-  webSite += "<meta charset='UTF-8'> <meta http-equiv='refresh' content='60' width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'/>";
-  webSite += "<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'><script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script><script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>";
+  webSite += "<meta charset='UTF-8'>"; 
+  webSite += "<meta http-equiv='refresh' content='60' width=device-width, initial-scale=0.1, maximum-scale=1, user-scalable=yes'/>";//define a responsividade da pagina
+  webSite += "<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>";
+  webSite += "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>";
+  webSite += "<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>";
   webSite += "<title>ESP8266 Demo - www.projetsdiy.fr</title></head><body>";
   webSite += "<div class='container-fluid'>";
   webSite +=   "<div class='row'>";
