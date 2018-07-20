@@ -19,7 +19,8 @@
 
 // variaveis GPIO
 const uint8_t GPIOPIN[4] = {D5, D6, D7, D8}; // Led array
-String  etatGpio[4] = {"OFF", "OFF", "OFF", "OFF"}; // inicia todos os pins e
+String  statusGpio[4] = {"OFF", "OFF", "OFF", "OFF"}; // inicia todos os pins e
+bool  boolGpio[4] = {0, 0, 0, 0}; //muda o status dos botões no server
 
 //variais de leitura dos sensores
 DHTesp dht;
@@ -81,47 +82,53 @@ String buildWebsite() { //pagina home html
   webSite +=       "<div class='col-sm-9'>";
   webSite +=       "<h3>GPIO</h3>";
 //
- webSite +=       "<div class='row'>";// cria a linha D5
-  webSite +=         "<div class='col-xs-1 col-sm-1'><h4 class ='text-left'>D5 ";// cria coluna 
-  webSite +=           "<span class='badge'>";
-  webSite +=           etatGpio[0]; //Array botão D5 exibe estatus do pino
-  webSite +=         "</span></h4></div>";
-  webSite +=         "<div class='col-xs-1 col-sm-2'><form action='/' method='POST'><button type='button submit' name='D5' value='1' class='btn btn-success btn-lg'>ON</button></form></div>";
-  webSite +=         "<div class='col-xs-1 col-sm-2'><form action='/' method='POST'><button type='button submit' name='D5' value='0' class='btn btn-danger btn-lg'>OFF</button></form></div>";
-  webSite +=       "</div>"; // D5
-//
- webSite +=       "<div class='row'>";// D6
-  webSite +=         "<div class='col-xs-1 col-sm-1'><h4 class ='text-left'>D6 ";
-  webSite +=           "<span class='badge'>";
-  webSite +=           etatGpio[1]; //Array botão D6 exibe estatus do pino
-  webSite +=         "</span></h4></div>";
-  webSite +=         "<div class='col-xs-1 col-sm-2'><form action='/' method='POST'><button type='button submit' name='D6' value='1' class='btn btn-success btn-lg'>ON</button></form></div>";
-  webSite +=         "<div class='col-xs-1 col-sm-2'><form action='/' method='POST'><button type='button submit' name='D6' value='0' class='btn btn-danger btn-lg'>OFF</button></form></div>";
-  webSite +=       "</div>"; // D6
-//
- webSite +=       "<div class='row'>";// D7
-  webSite +=         "<div class='col-xs-1 col-sm-1'><h4 class ='text-left'>D7 ";
-  webSite +=           "<span class='badge'>";
-  webSite +=           etatGpio[2]; //Array botão D7 exibe estatus do pino
-  webSite +=         "</span></h4></div>";
-  webSite +=         "<div class='col-xs-1 col-sm-2'><form action='/' method='POST'><button type='button submit' name='D7' value='1' class='btn btn-success btn-lg'>ON</button></form></div>";
-  webSite +=         "<div class='col-xs-1 col-sm-2'><form action='/' method='POST'><button type='button submit' name='D7' value='0' class='btn btn-danger btn-lg'>OFF</button></form></div>";
-  webSite +=       "</div>"; // D7
-//
- webSite +=       "<div class='row'>";// D8
-  webSite +=         "<div class='col-xs-1 col-sm-1'><h4 class ='text-left'>D8 ";
-  webSite +=         "<span class='badge'>";
-  webSite +=           etatGpio[3]; //Array botão D8 exibe estatus do pino
-  webSite +=         "</span></h4></div>";
-  webSite +=         "<div class='col-xs-1 col-sm-2'><form action='/' method='POST'><button type='button submit' name='D8' value='1' class='btn btn-success btn-lg'>ON</button></form></div>";
-  webSite +=         "<div class='col-xs-1 col-sm-2'><form action='/' method='POST'><button type='button submit' name='D8' value='0' class='btn btn-danger btn-lg'>OFF</button></form></div>";
-  webSite +=       "</div>"; // D8
+  webSite +=       "<article sytle='text-align: center'>"; //abre botões
+    webSite +=       "<section class='row'>";// D5
+    webSite +=         "<div class='col-xs-1 col-sm-2'><h4 class ='text-left'>D5 ";
+    webSite +=           "<span class='badge'>";
+    webSite +=           statusGpio[0]; //Array botão D5 exibe estatus do pino
+    webSite +=         "</span></h4></div>";
+    webSite +=         "<div class='col-xs-2 col-sm-2'>";
+    webSite +=         (boolGpio[0]) ? "<form action='/' method='POST'><button type='button submit' name='D5' value='1' class='btn btn-success btn-lg'>ON</button></form>" : "<form action='/' method='POST'><button type='button submit' name='D5' value='0' class='btn btn-danger btn-lg'>OFF</button></form>";
+    webSite +=         "</div>";
+    webSite +=       "</section>";
+  //
+    webSite +=       "<section class='row'>";// D6
+    webSite +=         "<div class='col-xs-1 col-sm-2'><h4 class ='text-left'>D6 ";
+    webSite +=           "<span class='badge'>";
+    webSite +=           statusGpio[1]; //Array botão D6 exibe estatus do pino
+    webSite +=         "</span></h4></div>";
+    webSite +=         "<div class='col-xs-2 col-sm-2'>";
+    webSite +=         (boolGpio[1]) ? "<form action='/' method='POST'><button type='button submit' name='D6' value='1' class='btn btn-success btn-lg'>ON</button></form>" : "<form action='/' method='POST'><button type='button submit' name='D6' value='0' class='btn btn-danger btn-lg'>OFF</button></form>";
+    webSite +=         "</div>";
+    webSite +=       "</section>";
+  //
+    webSite +=       "<section class='row'>";// D7
+    webSite +=         "<div class='col-xs-1 col-sm-2'><h4 class ='text-left'>D7 ";
+    webSite +=           "<span class='badge'>";
+    webSite +=           statusGpio[2]; //Array botão D7 exibe estatus do pino
+    webSite +=         "</span></h4></div>";
+    webSite +=         "<div class='col-xs-2 col-sm-2'>";
+    webSite +=         (boolGpio[2]) ? "<form action='/' method='POST'><button type='button submit' name='D7' value='1' class='btn btn-success btn-lg'>ON</button></form>" : "<form action='/' method='POST'><button type='button submit' name='D7' value='0' class='btn btn-danger btn-lg'>OFF</button></form>";
+    webSite +=         "</div>";
+    webSite +=       "</section>";
+  //
+    webSite +=       "<section class='row'>";// D8
+    webSite +=         "<div class='col-xs-1 col-sm-2'><h4 class ='text-left'>D8 ";
+    webSite +=           "<span class='badge'>";
+    webSite +=           statusGpio[3]; //Array botão D8 exibe estatus do pino
+    webSite +=         "</span></h4></div>";
+    webSite +=         "<div class='col-xs-2 col-sm-2'>";
+    webSite +=         (boolGpio[3]) ? "<form action='/' method='POST'><button type='button submit' name='D8' value='1' class='btn btn-success btn-lg'>ON</button></form>" : "<form action='/' method='POST'><button type='button submit' name='D8' value='0' class='btn btn-danger btn-lg'>OFF</button></form>";
+    webSite +=         "</div>";
+    webSite +=       "</section>";
+
+    webSite +=       "</article>";// fecha botões
 
   webSite +=       "</div>"; // botões ON OFF
   webSite +=       "</div>"; //GPIO
   webSite +=       "<div>";//fecha tabela responsiva
-  // webSite +=     "<br><p><a href='http://www.projetsdiy.fr'>www.projetsdiy.fr</p>
-  webSite += "</article>";
+
   webSite += "</div></div></div>";
   webSite += "</body></html>";
   return webSite;
@@ -132,11 +139,13 @@ void updateGPIO(int gpio, String DxValue) { // função de alteração do status
 
   if ( DxValue == "1" ) { // liga o pino
     digitalWrite(GPIOPIN[gpio], HIGH);
-    etatGpio[gpio] = "On";
+    statusGpio[gpio] = "On";
+     boolGpio[gpio] = 0;
     server.send ( 200, "text/html", buildWebsite() );//atualiza a pagina
   } else if ( DxValue == "0" ) {//desliga o pino
     digitalWrite(GPIOPIN[gpio], LOW);
-    etatGpio[gpio] = "Off";
+    statusGpio[gpio] = "Off";
+     boolGpio[gpio] = 1;
     server.send ( 200, "text/html", buildWebsite() ); // Atualiza a pagina
   } else {
     Serial.println("Err Led Value");
