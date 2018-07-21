@@ -69,8 +69,7 @@ String buildWebsite() { //pagina home html
   webSite +=         "<tbody>";  // Conteudo da tabela
   webSite +=           "<tr><td>DHT11</td><td>Temp</td><td>"; // primeira linha exibe a  temperatura
   webSite +=             t;// exibe a variavel de temperatura
-  webSite +=             "&deg;C</td><td>";
-  webSite +=             "-</td></tr>";
+  webSite +=             "&deg;C</td></tr>";
   webSite +=           "<tr class='active'><td>DHT11</td><td>Umid</td><td>"; // primeira linha exibe a  umidade
   webSite +=             h;// exibe a variavel de umidade
   webSite +=             "%</td></tr>";
