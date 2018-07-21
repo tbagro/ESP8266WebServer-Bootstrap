@@ -42,12 +42,12 @@ String buildWebsite() { //pagina home html
   webSite += "<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>";
   webSite += "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>";
   webSite += "<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>";
-  webSite += "<title>ESP8266 Demo - www.projetsdiy.fr</title></head><body>";
-
+  webSite += "<title>Mini estação Metereologica</title>";// titulo da pagina no navegador
+  webSite += "</head><body>";
   webSite += "<div class='container-fluid'>";
   webSite +=   "<div class='row'>";
   webSite +=     "<div class='col-md-12'>";
-  webSite +=       "<h1>Demo Webserver ESP8266 + Bootstrap</h1>";
+  webSite +=       "<h1>Webserver ESP8266 + Bootstrap</h1>";
   webSite +=       "<h3>Mini estação Metereologica</h3>";
   //
   webSite +=       "<ul class='nav nav-pills'>";
