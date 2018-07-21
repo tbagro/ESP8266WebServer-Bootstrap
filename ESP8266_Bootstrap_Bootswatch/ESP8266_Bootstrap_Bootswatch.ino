@@ -7,27 +7,57 @@
  * Licence : MIT
  * baseado neste código https://github.com/projetsdiy/ESP8266WebServer-Bootstrap-Bootswatch
 */
-
+//************Bibliotecas****************************
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
 #include <DHTesp.h> //https://github.com/beegee-tokyo/DHTesp
 
-//variaveis do router
+//************variaveis do router
 #define ssid      "SuaSSID"       // WiFi SSID
 #define password  "SuaSenha"   // WiFi password
 
 
-// variaveis GPIO
+//************ variaveis GPIO*************************
 const uint8_t GPIOPIN[4] = {D5, D6, D7, D8}; // Led array
 String  statusGpio[4] = {"OFF", "OFF", "OFF", "OFF"}; // inicia todos os pins e
 bool  boolGpio[4] = {0, 0, 0, 0}; //muda o status dos botões no server
 
-//variais de leitura dos sensores
+//************variais de leitura dos sensores
 DHTesp dht;
 float   t = 0 ;               //varivaveis que armazenam temporariamente a ultima leitura do sensor
 float   h = 0 ;               //varivaveis que armazenam temporariamente a ultima leitura do sensor
 
-//variaveis do servidor
+//************Memoria EEPROM virtual******************
+#include <EEPROM.h>
+uint8_t  eeAddress [4] = {9, 10, 11, 12}; // variavel inicial para armazenar os dados
+
+void Save_Data() { // Grava as variaveis na EEPROM
+  for ( int x = 0 ; x < 4 ; x++ ) {
+    EEPROM.put(eeAddress[x] , boolGpio[x]);// Grava a variavel se o valor for diferente
+    Serial.print( eeAddress[x] );
+    Serial.print(" boolGpio =");
+    Serial.println(boolGpio[x]);
+  }
+  EEPROM.commit(); //fixa as variaveis na eeprom
+  Serial.println("*  Dados salvos na EEPROM");
+}
+
+void Read_Data() { //Lê as variaveis na EEPROM na função EepromSetup()
+  for ( uint8_t x = 0 ; x < 4 ; x++ ) {
+    EEPROM.get(eeAddress[x] , boolGpio[x]);// Grava a variavel se o valor for diferente
+    Serial.print( eeAddress[x] );
+    Serial.print(" boolGpio =");
+    Serial.println(boolGpio[x]);
+  }
+  Serial.println("*  Dados lidos da EEPROM");
+}
+
+void EepromSetup() { //Recupera as variaveis no reinicio da placa - manter no Setup
+  EEPROM.begin(512); // define o tamanho da memoria virtual da Eeprom
+  Read_Data();//Lê as variaveis na EEPROM
+}
+
+//************variaveis do servidor***********
 ESP8266WebServer server ( 80 ); // porta local do servidor
 
 IPAddress ip(192, 168, 1, 116); //NodeMCU static IP
@@ -132,40 +162,51 @@ String buildWebsite() { //pagina home html
   webSite += "</body></html>";
   return webSite;
 }
+
+void check() { //monitora o status dos botões
+  for ( int x = 0 ; x < 4 ; x++ ) {
+    if (boolGpio[x] == 0) { // Array de consulta dos pinos GPIO
+      digitalWrite(GPIOPIN[x], HIGH);
+    } else {
+      digitalWrite(GPIOPIN[x], LOW);
+    }
+  }
+}
+
 void updateGPIO(int gpio, String DxValue) { // função de alteração do status do pino (pino,status)
   Serial.println("");
   Serial.println("Update GPIO "); Serial.print(GPIOPIN[gpio]); Serial.print(" -> "); Serial.println(DxValue);
 
-  if ( DxValue == "1" ) { // liga o pino
-    digitalWrite(GPIOPIN[gpio], HIGH);
-    statusGpio[gpio] = "On";
-     boolGpio[gpio] = 0;
+  if ( DxValue == "1") { // liga o pino
+    statusGpio[gpio] = "On"; // alterna Status do texto para ON
+    boolGpio[gpio] = 0; //muda o status do botão para OFF
     server.send ( 200, "text/html", buildWebsite() );//atualiza a pagina
+    Save_Data(); // grava a alteração na memoria eeprom
   } else if ( DxValue == "0" ) {//desliga o pino
-    digitalWrite(GPIOPIN[gpio], LOW);
     statusGpio[gpio] = "Off";
-     boolGpio[gpio] = 1;
+    boolGpio[gpio] = 1;//muda o status do botão para ON
+    Save_Data(); // grava a alteração na memoria eeprom
     server.send ( 200, "text/html", buildWebsite() ); // Atualiza a pagina
   } else {
     Serial.println("Err Led Value");
   }
 }
 
-void handleRoot() {
-  if ( server.hasArg("D5") ) { // busca no html a variavel
-    updateGPIO(0, server.arg("D5"));// chama a função updateGPIO e verifica no webserver se o name='D5' foi precionado o botão
+void handleRoot() { // verifica as variaveis do html
+  if ( server.hasArg("D5") ) { // se button nome == D5 
+    updateGPIO(0, server.arg("D5"));// chama a função updateGPIO e verifica no webserver se o name='D5' foi precionado ==1
   } else if ( server.hasArg("D6") ) {
-    updateGPIO(1, server.arg("D6")); // chama a função updateGPIO e verifica no webserver se o name='D6' foi precionado o botão
+    updateGPIO(1, server.arg("D6")); // chama a função updateGPIO e verifica no webserver se o name='D6' foi precionado ==1
   } else if ( server.hasArg("D7") ) {
-    updateGPIO(2, server.arg("D7")); // chama a função updateGPIO e verifica no webserver se o name='D7' foi precionado o botão
+    updateGPIO(2, server.arg("D7")); // chama a função updateGPIO e verifica no webserver se o name='D7' foi precionado ==1
   } else if ( server.hasArg("D8") ) {
-    updateGPIO(3, server.arg("D8")); // chama a função updateGPIO e verifica no webserver se o name='D8' foi precionado o botão
+    updateGPIO(3, server.arg("D8")); // chama a função updateGPIO e verifica no webserver se o name='D8' foi precionado ==1
   } else {
     server.send ( 200, "text/html", buildWebsite() ); // Atualiza a pagina
   }
 }
 
-
+//*****************Setup**********************
 void setup() {
   for ( int x = 0 ; x < 5 ; x++ ) {
     pinMode(GPIOPIN[x], OUTPUT); // Array de consulta dos pinos GPIO
@@ -184,25 +225,24 @@ void setup() {
   Serial.println ( "" );
   Serial.print ( "Connected to " ); Serial.println ( ssid );
   Serial.print ( "IP address: " ); Serial.println ( WiFi.localIP() );
-
+  //
+  EepromSetup();//recupera os dados da eeprom
   //monta o servidor
   server.on ( "/", handleRoot );// recupera a pagina principal
-
   server.begin(); // inicia o servidor
   Serial.println ( "HTTP server started" );
-
 }
-
-unsigned long TempoAnterior = 0;
-
+//*****************timers**********************
+unsigned long TempoAnterior = 0; // cronometro de leitura do sensor
+//*****************Loop*************************
 void loop() {
-unsigned long TempoAtual = millis(); // inicia a contagem do tempo
-
+ unsigned long TempoAtual = millis(); // inicia a contagem do tempo
   server.handleClient(); // executa o servidor
+ //leitura dos senres
   if ((unsigned long)(TempoAtual - TempoAnterior) >= 1000) {// A cada 1 segundo faz a leitura do sensor
     // faz a leitura dos sensores
-    t = dht.getTemperature();
-    h = dht.getHumidity();
+    t = dht.getTemperature(); // temperatura em Célsius 
+    h = dht.getHumidity(); //umidade
   }
   TempoAnterior = TempoAtual; // zera o cronometro
 }
