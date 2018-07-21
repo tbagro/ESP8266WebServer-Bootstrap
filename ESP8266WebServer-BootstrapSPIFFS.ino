@@ -257,4 +257,5 @@ void loop() {
     h = dht.getHumidity(); //umidade
   }
   TempoAnterior = TempoAtual; // zera o cronometro
+ yield();
 }
