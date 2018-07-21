@@ -191,11 +191,11 @@ void updateGPIO(int gpio, String DxValue) { // função de alteração do status
     statusGpio[gpio] = "On"; // alterna Status do texto para ON
     boolGpio[gpio] = 0; //muda o status do botão para OFF
     server.send ( 200, "text/html", buildWebsite() );//atualiza a pagina
-    Save_Data(); // grava a alteração na memoria eeprom
+    SPIFFS_Save_Data(); // grava a alteração na memoria  SPIFFS
   } else if ( DxValue == "0" ) {//desliga o pino
     statusGpio[gpio] = "Off";
     boolGpio[gpio] = 1;//muda o status do botão para ON
-    Save_Data(); // grava a alteração na memoria eeprom
+    SPIFFS_Save_Data(); // grava a alteração na memoria SPIFFS
     server.send ( 200, "text/html", buildWebsite() ); // Atualiza a pagina
   } else {
     Serial.println("Err Led Value");
@@ -231,12 +231,12 @@ void setup() {
   while ( WiFi.status() != WL_CONNECTED ) {//enquanto não conecta mostra as tentativas
     delay ( 500 ); Serial.print ( "." );
   }
-  // Connexion WiFi établie / WiFi connexion is OK
+  // Connexion WiFi  / WiFi connexion is OK
   Serial.println ( "" );
   Serial.print ( "Connected to " ); Serial.println ( ssid );
   Serial.print ( "IP address: " ); Serial.println ( WiFi.localIP() );
   //
-  EepromSetup();//recupera os dados da eeprom
+  SPIFFS_Setup();//recupera os dados da SPIFFS
   //monta o servidor
   server.on ( "/", handleRoot );// recupera a pagina principal
   server.begin(); // inicia o servidor
@@ -247,7 +247,9 @@ unsigned long TempoAnterior = 0; // cronometro de leitura do sensor
 //*****************Loop*************************
 void loop() {
  unsigned long TempoAtual = millis(); // inicia a contagem do tempo
+ //funções 
   server.handleClient(); // executa o servidor
+  check(); // verifica a variavel boolGpio[gpio]
  //leitura dos senres
   if ((unsigned long)(TempoAtual - TempoAnterior) >= 1000) {// A cada 1 segundo faz a leitura do sensor
     // faz a leitura dos sensores
