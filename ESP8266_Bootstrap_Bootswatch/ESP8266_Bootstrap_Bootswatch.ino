@@ -150,41 +150,22 @@ void updateGPIO(int gpio, String DxValue) { // função de alteração do status
   } else {
     Serial.println("Err Led Value");
   }
-
-  void handleD5() {
-  String D5Value; // busca a string
-  updateGPIO(0, server.arg("D5"));// verifica no webserver se o name='D5' foi precionado
-}
-
-void handleD6() {
-  String D6Value;
-  updateGPIO(1, server.arg("D6")); // verifica no webserver se o name='D6' foi precionado
-}
-
-void handleD7() {
-  String D7Value;
-  updateGPIO(2, server.arg("D7")); // verifica no webserver se o name='D7' foi precionado
-}
-
-void handleD8() {
-  String D8Value;
-  updateGPIO(3, server.arg("D8")); // verifica no webserver se o name='D8' foi precionado
-
 }
 
 void handleRoot() {
   if ( server.hasArg("D5") ) { // busca no html a variavel
-    handleD5();
+    updateGPIO(0, server.arg("D5"));// chama a função updateGPIO e verifica no webserver se o name='D5' foi precionado o botão
   } else if ( server.hasArg("D6") ) {
-    handleD6();
+    updateGPIO(1, server.arg("D6")); // chama a função updateGPIO e verifica no webserver se o name='D6' foi precionado o botão
   } else if ( server.hasArg("D7") ) {
-    handleD7();
+    updateGPIO(2, server.arg("D7")); // chama a função updateGPIO e verifica no webserver se o name='D7' foi precionado o botão
   } else if ( server.hasArg("D8") ) {
-    handleD8();
+    updateGPIO(3, server.arg("D8")); // chama a função updateGPIO e verifica no webserver se o name='D8' foi precionado o botão
   } else {
     server.send ( 200, "text/html", buildWebsite() ); // Atualiza a pagina
   }
 }
+
 
 void setup() {
   for ( int x = 0 ; x < 5 ; x++ ) {
